@@ -1,6 +1,8 @@
 package io.gitlab.rxp90.jsymspell.api;
 
-public class DamerauLevenshteinOSA implements StringDistance {
+import java.io.Serializable;
+
+public class DamerauLevenshteinOSA implements StringDistance, Serializable {
 
     private final CharComparator charComparator;
 

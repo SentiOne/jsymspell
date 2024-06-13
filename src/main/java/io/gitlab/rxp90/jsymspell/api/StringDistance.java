@@ -1,6 +1,8 @@
 package io.gitlab.rxp90.jsymspell.api;
 
-public interface StringDistance {
+import java.io.Serializable;
+
+public interface StringDistance extends Serializable {
 
     /**
      * Calculates the distance between {@code string1} and {@code string2}, early stopping at {@code maxDistance}.

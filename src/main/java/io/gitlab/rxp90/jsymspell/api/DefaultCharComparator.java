@@ -1,4 +1,6 @@
 package io.gitlab.rxp90.jsymspell.api;
 
-public class DefaultCharComparator implements CharComparator {
+import java.io.Serializable;
+
+public class DefaultCharComparator implements CharComparator, Serializable {
 }

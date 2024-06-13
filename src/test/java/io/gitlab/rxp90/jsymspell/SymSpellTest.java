@@ -6,7 +6,7 @@ import io.gitlab.rxp90.jsymspell.api.SuggestItem;
 import io.gitlab.rxp90.jsymspell.exceptions.NotInitializedException;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -37,6 +37,27 @@ class SymSpellTest {
                                                      .createSymSpell();
 
         Map<String, Collection<String>> deletes = symSpell.getDeletes();
+
+        Collection<String> suggestions = deletes.get("abcd");
+        assertTrue(suggestions.containsAll(Arrays.asList("abcde", "abcdef")), "abcd == abcde - {e} (distance 1), abcd == abcdef - {ef} (distance 2)");
+    }
+
+    @Test
+    void serializeAndDeserialize() throws Exception {
+        SymSpellImpl symSpell = new SymSpellBuilder().setMaxDictionaryEditDistance(2)
+                .setUnigramLexicon(mapOf("abcde", 100L, "abcdef", 90L))
+                .createSymSpell();
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+        objectOutputStream.writeObject(symSpell);
+        byte[] serialized = byteArrayOutputStream.toByteArray();
+
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(serialized);
+        ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+        SymSpellImpl deserializedSymSpell = (SymSpellImpl) objectInputStream.readObject();
+
+        Map<String, Collection<String>> deletes = deserializedSymSpell.getDeletes();
 
         Collection<String> suggestions = deletes.get("abcd");
         assertTrue(suggestions.containsAll(Arrays.asList("abcde", "abcdef")), "abcd == abcde - {e} (distance 1), abcd == abcdef - {ef} (distance 2)");

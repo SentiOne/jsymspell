@@ -5,13 +5,14 @@ import io.gitlab.rxp90.jsymspell.api.StringDistance;
 import io.gitlab.rxp90.jsymspell.api.SuggestItem;
 import io.gitlab.rxp90.jsymspell.exceptions.NotInitializedException;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import static io.gitlab.rxp90.jsymspell.Verbosity.*;
 
-public class SymSpellImpl implements SymSpell {
+public class SymSpellImpl implements SymSpell, Serializable {
 
     private static final Logger logger = Logger.getLogger(SymSpellImpl.class.getName());
     private static final long BIGRAM_COUNT_MIN = Long.MAX_VALUE;

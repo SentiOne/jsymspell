@@ -1,11 +1,12 @@
 package io.gitlab.rxp90.jsymspell.api;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Holds a pair of words.
  */
-public class Bigram {
+public class Bigram implements Serializable {
     private final String word1;
     private final String word2;
 

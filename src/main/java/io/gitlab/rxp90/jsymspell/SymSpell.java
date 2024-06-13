@@ -4,6 +4,7 @@ import io.gitlab.rxp90.jsymspell.api.Bigram;
 import io.gitlab.rxp90.jsymspell.api.SuggestItem;
 import io.gitlab.rxp90.jsymspell.exceptions.NotInitializedException;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  *
  * @see <a href="https://github.com/wolfgarbe/SymSpell">https://github.com/wolfgarbe/SymSpell</a>
  */
-public interface SymSpell {
+public interface SymSpell extends Serializable {
     /**
      * Returns a sorted {@code List} of {@code SuggestItem} for a given {@code input}
      * @param input string to apply spelling correction to
